@@ -23,7 +23,7 @@ app.use(morgan("dev"));
 app.use(cors({ origin: "*" })); // comunicación entre dev servers en local
 
 // métodos de recogida de datos desde formularios
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride());
 // sesión
 app.use(

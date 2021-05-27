@@ -13,6 +13,7 @@ export const checkDuplicate = async (req, res, next) => {
 };
 // comprueba si existe rol
 export const checkRolesExist = (req, res, next) => {
+    console.log(req.body.roles);
     if (req.body.roles) {
         for (let i = 0; i < req.body.roles.length; i++) {
             if (!ROLES.includes(req.body.roles[i])) {

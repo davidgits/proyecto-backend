@@ -7,8 +7,8 @@ import Role from "../models/Role";
 
 // NUEVO USUARIO
 export const signUp = async (req, res) => {
+    
     const { username, email, password, roles } = req.body;
-
     const newUser = new User({
         username,
         email,
@@ -27,17 +27,16 @@ export const signUp = async (req, res) => {
     }
 
     // crea un alumno con username y email del usuario creado
-    if(role.name === 'student') {
-        const newStudent = new Student({
-            username: newUser.username,
-            email: newUser.username
-        });
-        const savedStudent = await newStudent.save();
-        console.log(savedStudent);
-    }
+    // if(role.name === 'student') {
+    //     const newStudent = new Student({
+    //         username: newUser.username,
+    //         email: newUser.username
+    //     });
+    //     const savedStudent = await newStudent.save();
+    //     console.log(savedStudent);
+    // }
 
     // guarda el usuario
-    console.log('por aquí pasó');
     const savedUser = await newUser.save();
     console.log(savedUser);
 
@@ -48,6 +47,7 @@ export const signUp = async (req, res) => {
 
     // devuelve el token
     res.status(200).json({ token });
+    res.json({"message": "new user created"});
 };
 
 export const signIn = async (req, res) => {
@@ -66,5 +66,7 @@ export const signIn = async (req, res) => {
         expiresIn: 7200,
     });
     console.log(userFound);
-    res.json({ token }); // = token: token
+    const username = userFound.username;
+    const message = `Bienvenido ${username}`;
+    res.status(200).json({ token, username, message }); // = token: token
 };

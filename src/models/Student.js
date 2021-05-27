@@ -9,12 +9,14 @@ const studentSchema = new Schema(
         email: String,
         address: String,
         phone: Number,
+        birthdate: Date,
         activity: [
             {
                 name: String,
                 group: String,
             },
         ],
+        enrolldate: Date,
     },
     {
         timestamps: true,
