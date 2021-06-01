@@ -17,6 +17,7 @@ const studentSchema = new Schema(
             },
         ],
         enrolldate: Date,
+        imgUrl: String
     },
     {
         timestamps: true,

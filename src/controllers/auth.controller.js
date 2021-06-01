@@ -26,16 +26,6 @@ export const signUp = async (req, res) => {
         newUser.roles = [role._id];
     }
 
-    // crea un alumno con username y email del usuario creado
-    // if(role.name === 'student') {
-    //     const newStudent = new Student({
-    //         username: newUser.username,
-    //         email: newUser.username
-    //     });
-    //     const savedStudent = await newStudent.save();
-    //     console.log(savedStudent);
-    // }
-
     // guarda el usuario
     const savedUser = await newUser.save();
     console.log(savedUser);
@@ -46,8 +36,7 @@ export const signUp = async (req, res) => {
     });
 
     // devuelve el token
-    res.status(200).json({ token });
-    res.json({"message": "new user created"});
+    res.status(200).json({ token, "message": "new user created" });
 };
 
 export const signIn = async (req, res) => {
