@@ -11,6 +11,7 @@ import { createRoles } from "./libs/initialSetup";
 import studentsRoutes from "./routes/students.routes";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
+import mailerRoutes from './routes/mailer.routes'
 import cors from 'cors'
 
 const app = express();
@@ -45,5 +46,7 @@ app.get("/", (req, res) => {
 app.use("/api/students", studentsRoutes);
 app.use("/api/auth", authRoutes); // logging y register
 app.use("/api/users", userRoutes);
+// mailer
+app.use("/api/mailer", mailerRoutes);
 
 export default app;
