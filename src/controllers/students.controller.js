@@ -3,8 +3,8 @@ import Student from "../models/Student";
 // funciones de alumnos
 export const createStudent = async (req, res) => {
     // console.log(req.body);
-    const { name, surname, dni, email, phone, activity, address, imageURL } = req.body;
-    const newStudent = new Student({ name, surname, dni, email, phone, activity, address, imageURL });
+    const { name, surname, dni, email, phone, birthdate, activity, address, enrolldate, imageURL } = req.body;
+    const newStudent = new Student({ name, surname, dni, email, phone, birthdate, activity, address, enrolldate, imageURL });
     const studentSaved = await newStudent.save();
     res.status(201).json(studentSaved);
     console.log("new student saved", newStudent._id);
@@ -20,11 +20,22 @@ export const getStudentById = async (req, res) => {
     res.status(200).json(student);
 };
 
+// buscar por nombre
+export const getStudentByName = async (req, res) => {
+    const name = req.params.name;
+    const student = await Student.find({ nombre: { $regex: "(?i).*" + name + "(?i).*" } });
+    student
+        ? res.status(200).json(student)
+        : res.status(400).json({
+              message: "No hay coincidencias",
+          });
+};
+
 export const updateStudentById = async (req, res) => {
     const updatedStudent = await Student.findByIdAndUpdate(req.params.studentId, req.body, {
         new: true,
     });
-    res.status(200).json(updatedStudent);
+    res.status(200).json({message: "alumno actualizado"});
 };
 
 export const deleteStudentById = async (req, res) => {

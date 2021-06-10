@@ -12,6 +12,8 @@ router.post("/", [authJwt.verifyToken, authJwt.isTeacher, authJwt.isAdmin], stud
 router.get("/", [authJwt.verifyToken, authJwt.isTeacher, authJwt.isAdmin], studentsCtrl.getStudents);
 // buscar por id
 router.get("/:studentId", [authJwt.verifyToken, authJwt.isTeacher, authJwt.isAdmin], studentsCtrl.getStudentById);
+// buscar por nombre
+router.get("/find/:studentName", [authJwt.verifyToken, authJwt.isTeacher, authJwt.isAdmin], studentsCtrl.getStudentByName);
 // actualizar
 router.put("/:studentId", [authJwt.verifyToken, authJwt.isTeacher, authJwt.isAdmin], studentsCtrl.updateStudentById);
 // eliminar
