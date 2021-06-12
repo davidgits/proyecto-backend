@@ -23,7 +23,6 @@ export const getStudentById = async (req, res) => {
 // buscar por nombre
 export const getStudentByName = async (req, res) => {
     const name = req.params.studentName;
-    console.log(req.params);
     const student = await Student.find({ name: { $regex: "(?i).*" + name + "(?i).*" } });
     student
         ? res.status(200).json(student)
@@ -42,5 +41,6 @@ export const updateStudentById = async (req, res) => {
 export const deleteStudentById = async (req, res) => {
     const { studentId } = req.params;
     await Student.findByIdAndDelete(studentId);
-    res.status(204).json({message: "Alumno eliminado"});
+    res.status(200).json({message: "Alumno eliminado"});
+    console.log("student deleted", studentId);
 };
