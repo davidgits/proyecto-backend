@@ -1,0 +1,15 @@
+--- dev connection db ----
+.connect("mongodb://localhost/escueladb", {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: true,
+        useCreateIndex: true
+    })
+    
+---- babel ---
+    
+    "scripts": {
+    "build": "babel src --out-dir build",
+    "dev": "nodemon src/index.js --exec babel-node",
+    "start": "node build/index.js"
+  },
