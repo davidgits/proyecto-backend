@@ -16,7 +16,6 @@ import cors from 'cors'
 
 const app = express();
 createRoles(); // crea los roles al inicio de la app
-
 app.set("pkg", pkg);
 
 app.use(express.json());
