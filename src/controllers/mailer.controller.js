@@ -7,37 +7,35 @@ export const sendEmail = async (req, res) => {
 
     // cuerpo del email
     const contentHTML = `
-            <html>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>message</title>
+            </head>
+            <body>
             <h1>Mensaje de contacto a ZenshinDojo</h1>
             <hr/>
             <ul>
                 <li>Nombre: ${name}</li>
                 <li>Email: ${email}</li>
-                <li>Teléfono: ${phone}</li>
+                <li>Telefono: ${phone}</li>
                 <li>Asunto: ${subject}</li>
             </ul>
             <hr/>
             <p>${message}</p>
+            </body>            
             </html>
         `;
 
-    // TODO guardar configuración en variable de entorno
-    /*const transporter = nodemailer.createTransport({
-            host: '',
-            port: 26,
-            secure: false,
-            auth: {
-                user: 'test@zenshindojo.com',
-                pass: 'contraseña'
-            }
-        })*/
-    // ethereal.mail testing
     const transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
+        host: process.env.MAIL_HOST,
+        port: process.env.MAIL_PORT,
         auth: {
-            user: "elias.bergstrom@ethereal.email",
-            pass: "wf5erA4duzv5Vuz6WR",
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PASS,
         },
         tls: {
             rejectUnauthorized: false,
@@ -47,7 +45,7 @@ export const sendEmail = async (req, res) => {
     // reenvía el correo del smtp server a un correo electrónico personal
     await transporter.sendMail(
         {
-            from: "ethereal server <elias.bergstrom@ethereal.email>",
+            from: "user:test@zenshindojo.com",
             to: "trufa80@gmail.com",
             subject: "Website Contact Form",
             text: contentHTML,
