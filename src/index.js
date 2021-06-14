@@ -1,3 +1,4 @@
+import "babel-polyfill";
 // arranca la aplicación
 import app from "./app";
 
