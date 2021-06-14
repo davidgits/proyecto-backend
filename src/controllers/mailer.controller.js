@@ -33,13 +33,13 @@ export const sendEmail = async (req, res) => {
     const transporter = nodemailer.createTransport({
         host: process.env.MAIL_HOST,
         port: process.env.MAIL_PORT,
+        secure: false,
+        requireTLS: true,
         auth: {
             user: process.env.MAIL_USER,
             pass: process.env.MAIL_PASS,
         },
-        tls: {
-            rejectUnauthorized: false,
-        },
+        logger: true
     });
 
     // reenvía el correo del smtp server a un correo electrónico personal
@@ -49,6 +49,7 @@ export const sendEmail = async (req, res) => {
             to: "trufa80@gmail.com",
             subject: "Website Contact Form",
             text: contentHTML,
+            headers: { 'x-cloudmta-class': 'standard' }
         },
         (err, info) => {
             if (err) {
